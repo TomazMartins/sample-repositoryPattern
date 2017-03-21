@@ -3,6 +3,7 @@ package br.com.algorithmworks.samplerequery.app;
 import android.app.Application;
 import android.os.StrictMode;
 
+import br.com.algorithmworks.samplerequery.model.Models;
 import io.requery.Persistable;
 import io.requery.android.sqlite.DatabaseSource;
 import io.requery.meta.EntityModel;
@@ -27,7 +28,11 @@ public class SampleApplication extends Application {
      * @return the EntityDataStore responsible to connection with database.
      */
     public EntityDataStore<Persistable> getDataStore() {
-        EntityModel models = null;
+        /*
+        * The class 'Models' is generated when the at least one
+        *   table is created.
+        * */
+        EntityModel models = Models.DEFAULT;
 
 
         // Guarantee that there is only one connection with the database.
