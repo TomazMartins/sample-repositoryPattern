@@ -19,5 +19,5 @@ public interface IPerson extends Parcelable, Persistable {
     int getAge();
 
     @OneToMany
-    List<IPhone> getPhones();
+    List<Phone> getPhones();
 }

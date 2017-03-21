@@ -43,7 +43,7 @@ public class SampleApplication extends Application {
             *   As parameters: a 'context', a 'EntityModel' and a number,
             *   indicate the version of the database.
             * */
-            DatabaseSource source = new DatabaseSource( this, models, 2 );
+            DatabaseSource source = new DatabaseSource( this, models, 3 );
 
             Configuration configuration = source.getConfiguration();
 
