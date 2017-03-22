@@ -12,53 +12,55 @@ import br.com.algorithmworks.samplerequery.model.Person;
 import br.com.algorithmworks.samplerequery.model.Phone;
 import br.com.algorithmworks.samplerequery.record.PersonRecorder;
 import br.com.algorithmworks.samplerequery.record.PhoneRecorder;
+import br.com.algorithmworks.samplerequery.record.Recorder;
 import io.requery.Persistable;
 import io.requery.sql.EntityDataStore;
 
 public class MainActivity extends AppCompatActivity {
-    private EntityDataStore<Persistable> dataStore;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
 
-        dataStore = ((SampleApplication) getApplication()).getDataStore();
+        EntityDataStore<Persistable> dataStore = ((SampleApplication) getApplication())
+                .getDataStore();
 
-        PersonRecorder personRecord = new PersonRecorder( dataStore );
-        PhoneRecorder phoneRecord = new PhoneRecorder( dataStore );
+        Recorder recorder = new PersonRecorder( dataStore );
 
         Person someone = new Person();
         someone.setName( "Example" );
         someone.setAge( 100 );
 
-        personRecord.save( someone );
-
-        Phone phoneSomeone = new Phone();
-        phoneSomeone.setNumber( "99999-9999" );
-        phoneSomeone.setPerson( someone );
-
-        phoneRecord.save( phoneSomeone );
-
-        Phone anotherPhoneSomeone = new Phone();
-        anotherPhoneSomeone.setNumber( "88888-8888" );
-        anotherPhoneSomeone.setPerson( someone );
-
-        phoneRecord.save( anotherPhoneSomeone );
+        recorder.save( someone );
 
         Person anotherone = new Person();
         anotherone.setName( "Another Example" );
         anotherone.setAge( 50 );
 
-        personRecord.save( anotherone );
+        recorder.save( anotherone );
+
+        List<Person> people = (List<Person>) recorder.getAll();
+
+        recorder = new PhoneRecorder( dataStore );
+
+        Phone phoneSomeone = new Phone();
+        phoneSomeone.setNumber( "99999-9999" );
+        phoneSomeone.setPerson( someone );
+
+        recorder.save( phoneSomeone );
+
+        Phone anotherPhoneSomeone = new Phone();
+        anotherPhoneSomeone.setNumber( "88888-8888" );
+        anotherPhoneSomeone.setPerson( someone );
+
+        recorder.save( anotherPhoneSomeone );
 
         Phone phoneAnotherone = new Phone();
         phoneAnotherone.setNumber( "33333-3333" );
         phoneAnotherone.setPerson( anotherone );
 
-        phoneRecord.save( phoneAnotherone );
-
-        List<Person> people = personRecord.getAll();
+        recorder.save( phoneAnotherone );
 
         for( Person person : people ) {
             Log.i( "Record", "Person: {" +
