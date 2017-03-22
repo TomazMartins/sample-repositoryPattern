@@ -1,4 +1,4 @@
-package br.com.algorithmworks.samplerequery.app;
+package br.com.algorithmworks.samplerequery.application;
 
 import android.app.Application;
 import android.os.StrictMode;

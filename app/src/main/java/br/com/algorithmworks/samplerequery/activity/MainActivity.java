@@ -7,7 +7,7 @@ import android.util.Log;
 import java.util.List;
 
 import br.com.algorithmworks.samplerequery.R;
-import br.com.algorithmworks.samplerequery.app.SampleApplication;
+import br.com.algorithmworks.samplerequery.application.SampleApplication;
 import br.com.algorithmworks.samplerequery.model.Person;
 import br.com.algorithmworks.samplerequery.model.Phone;
 import br.com.algorithmworks.samplerequery.record.PersonRecorder;

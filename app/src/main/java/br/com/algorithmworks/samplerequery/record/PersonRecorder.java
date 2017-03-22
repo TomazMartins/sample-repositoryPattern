@@ -1,7 +1,5 @@
 package br.com.algorithmworks.samplerequery.record;
 
-import android.util.Log;
-
 import java.util.List;
 
 import br.com.algorithmworks.samplerequery.model.Person;
@@ -9,52 +7,46 @@ import io.requery.Persistable;
 import io.requery.sql.EntityDataStore;
 
 
-public class PersonRecorder {
-    private EntityDataStore<Persistable> dataStore;
-
+public class PersonRecorder extends BaseRecorder {
     public PersonRecorder( EntityDataStore<Persistable> data ) {
-        this.dataStore = data;
+        super( data );
     }
 
-    public void save( final Person person ) {
-        dataStore.insert( person );
-
-        Log.i( "PersonRecorder", person.toString() +
-                " saved with success"
-        );
+    @Override
+    public void save( final Object object ) {
+        if( object instanceof Person ) {
+            getDataStore().insert( (Person) object );
+        }
     }
 
-    public void delete( final int id ) {
-        Person person = this.getById( id );
-        dataStore.delete( person );
-
-        Log.i( "PersonRecorder", person.toString() +
-                " deleted with success"
-        );
+    @Override
+    public void update( final Object object ) {
+        if( object instanceof Person ) {
+            getDataStore().update( (Person) object );
+        }
     }
 
-    public void delete( final Person person ) {
-        dataStore.delete( person );
-
-        Log.i( "PersonRecorder", person.toString() +
-                " deleted with success"
-        );
+    @Override
+    public void delete( final Object object ) {
+        if( object instanceof Person ) {
+            getDataStore().delete( (Person) object );
+        }
     }
 
+    @Override
     public Person getById( final int id ) {
-        return dataStore.select( Person.class )
+        return getDataStore()
+                .select( Person.class )
                 .where( Person.ID.eq( id )
                 ).get()
                 .first();
     }
 
+    @Override
     public List<Person> getAll() {
-        return dataStore.select( Person.class )
+        return getDataStore()
+                .select( Person.class )
                 .get()
                 .toList();
-    }
-
-    public EntityDataStore<Persistable> getDataStore() {
-        return this.dataStore;
     }
 }
