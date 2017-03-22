@@ -10,8 +10,8 @@ import br.com.algorithmworks.samplerequery.R;
 import br.com.algorithmworks.samplerequery.app.SampleApplication;
 import br.com.algorithmworks.samplerequery.model.Person;
 import br.com.algorithmworks.samplerequery.model.Phone;
-import br.com.algorithmworks.samplerequery.record.PersonRecord;
-import br.com.algorithmworks.samplerequery.record.PhoneRecord;
+import br.com.algorithmworks.samplerequery.record.PersonRecorder;
+import br.com.algorithmworks.samplerequery.record.PhoneRecorder;
 import io.requery.Persistable;
 import io.requery.sql.EntityDataStore;
 
@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         dataStore = ((SampleApplication) getApplication()).getDataStore();
 
-        PersonRecord personRecord = new PersonRecord( dataStore );
-        PhoneRecord phoneRecord = new PhoneRecord( dataStore );
+        PersonRecorder personRecord = new PersonRecorder( dataStore );
+        PhoneRecorder phoneRecord = new PhoneRecorder( dataStore );
 
         Person someone = new Person();
         someone.setName( "Example" );

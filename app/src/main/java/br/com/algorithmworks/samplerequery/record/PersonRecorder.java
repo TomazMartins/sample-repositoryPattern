@@ -9,17 +9,17 @@ import io.requery.Persistable;
 import io.requery.sql.EntityDataStore;
 
 
-public class PersonRecord {
+public class PersonRecorder {
     private EntityDataStore<Persistable> dataStore;
 
-    public PersonRecord( EntityDataStore<Persistable> data ) {
+    public PersonRecorder( EntityDataStore<Persistable> data ) {
         this.dataStore = data;
     }
 
     public void save( final Person person ) {
         dataStore.insert( person );
 
-        Log.i( "PersonRecord", person.toString() +
+        Log.i( "PersonRecorder", person.toString() +
                 " saved with success"
         );
     }
@@ -28,7 +28,7 @@ public class PersonRecord {
         Person person = this.getById( id );
         dataStore.delete( person );
 
-        Log.i( "PersonRecord", person.toString() +
+        Log.i( "PersonRecorder", person.toString() +
                 " deleted with success"
         );
     }
@@ -36,7 +36,7 @@ public class PersonRecord {
     public void delete( final Person person ) {
         dataStore.delete( person );
 
-        Log.i( "PersonRecord", person.toString() +
+        Log.i( "PersonRecorder", person.toString() +
                 " deleted with success"
         );
     }

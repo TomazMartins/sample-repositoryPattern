@@ -9,17 +9,17 @@ import br.com.algorithmworks.samplerequery.model.Phone;
 import io.requery.Persistable;
 import io.requery.sql.EntityDataStore;
 
-public class PhoneRecord {
+public class PhoneRecorder {
     private EntityDataStore<Persistable> dataStore;
 
-    public PhoneRecord( EntityDataStore<Persistable> data ) {
+    public PhoneRecorder( EntityDataStore<Persistable> data ) {
         this.dataStore = data;
     }
 
     public void save( final Phone phone ) {
         dataStore.insert( phone );
 
-        Log.i( "PhoneRecord", phone.toString() +
+        Log.i( "PhoneRecorder", phone.toString() +
                 "saved with success"
         );
     }
@@ -28,7 +28,7 @@ public class PhoneRecord {
         Phone phone = this.getById( id );
         dataStore.delete( phone );
 
-        Log.i( "PhoneRecord", phone.toString() +
+        Log.i( "PhoneRecorder", phone.toString() +
                 "deleted with success"
         );
     }
@@ -36,7 +36,7 @@ public class PhoneRecord {
     public void delete( final Phone phone ) {
         dataStore.delete( phone );
 
-        Log.i( "PhoneRecord", phone.toString() +
+        Log.i( "PhoneRecorder", phone.toString() +
                 "deleted with success"
         );
     }
