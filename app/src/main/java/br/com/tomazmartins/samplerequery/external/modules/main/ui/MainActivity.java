@@ -1,4 +1,4 @@
-package br.com.tomazmartins.samplerequery.activity;
+package br.com.tomazmartins.samplerequery.external.modules.main.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
