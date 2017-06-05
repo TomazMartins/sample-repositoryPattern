@@ -1,4 +1,4 @@
-package br.com.algorithmworks.samplerequery;
+package br.com.tomazmartins.samplerequery;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
