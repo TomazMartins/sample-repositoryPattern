@@ -1,7 +1,7 @@
 package br.com.tomazmartins.samplerequery.core.models;
 
 
-class President {
+public class President {
     private Country mCountry;
     private String mName;
     private int mId;
