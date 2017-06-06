@@ -9,14 +9,20 @@ import br.com.tomazmartins.samplerequery.external.infrastructure.db.mapper.Mappe
 public class PresidentMapper implements Mapper<PresidentEntity, President> {
     @Override
     public President mapFrom( PresidentEntity fromObject ) {
-        President president = new President();
+        President president;
 
-        president.setName( fromObject.getName() );
-        president.setId( fromObject.getId() );
+        if( fromObject != null ) {
+            president = new President();
 
-        Country country = new CountryMapper().mapFrom( fromObject.getCountry() );
+            president.setName( fromObject.getName() );
+            president.setId( fromObject.getId() );
 
-        president.setCountry( country );
+            Country country = new CountryMapper().mapFrom( fromObject.getCountry() );
+
+            president.setCountry( country );
+        } else {
+            president = null;
+        }
 
         return president;
     }
