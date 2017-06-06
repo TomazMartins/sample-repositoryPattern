@@ -45,6 +45,7 @@ public class SampleApplication extends Application {
             *   indicate the version of the database.
             * */
             DatabaseSource source = new DatabaseSource( this, models, DB_VERSION );
+            source.setLoggingEnabled( true );
 
             Configuration configuration = source.getConfiguration();
 
