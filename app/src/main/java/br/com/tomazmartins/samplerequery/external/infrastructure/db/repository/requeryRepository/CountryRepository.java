@@ -1,6 +1,8 @@
 package br.com.tomazmartins.samplerequery.external.infrastructure.db.repository.requeryRepository;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
