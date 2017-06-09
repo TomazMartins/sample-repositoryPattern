@@ -4,49 +4,49 @@ package br.com.tomazmartins.samplerequery.core.models;
 import java.util.List;
 
 public class Country {
-    private List<State> mStates;
-    private President mPresident;
-    private int mPopulation;
-    private String mName;
-    private int mId;
+    private List<State> states;
+    private President president;
+    private int population;
+    private String name;
+    private int id;
 
     public List<State> getStates() {
-        return mStates;
+        return states;
     }
 
     public void setStates( List<State> states ) {
-        this.mStates = states;
+        this.states = states;
     }
 
     public President getPresident() {
-        return mPresident;
+        return president;
     }
 
     public void setPresident( President president ) {
-        this.mPresident = president;
+        this.president = president;
     }
 
     public int getPopulation() {
-        return mPopulation;
+        return population;
     }
 
     public void setPopulation( int population ) {
-        this.mPopulation = population;
+        this.population = population;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public void setName( String name ) {
-        this.mName = name;
+        this.name = name;
     }
 
     public int getId() {
-        return mId;
+        return id;
     }
 
     public void setId( int id ) {
-        this.mId = id;
+        this.id = id;
     }
 }

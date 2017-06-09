@@ -2,31 +2,31 @@ package br.com.tomazmartins.samplerequery.core.models;
 
 
 public class President {
-    private Country mCountry;
-    private String mName;
-    private int mId;
+    private Country country;
+    private String name;
+    private int id;
 
     public Country getCountry() {
-        return mCountry;
+        return country;
     }
 
     public void setCountry( Country country ) {
-        this.mCountry = country;
+        this.country = country;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public void setName( String name ) {
-        this.mName = name;
+        this.name = name;
     }
 
     public int getId() {
-        return mId;
+        return id;
     }
 
     public void setId( int id ) {
-        this.mId = id;
+        this.id = id;
     }
 }
