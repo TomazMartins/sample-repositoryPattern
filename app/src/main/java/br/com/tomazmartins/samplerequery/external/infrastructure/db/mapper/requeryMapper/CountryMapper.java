@@ -1,29 +1,21 @@
 package br.com.tomazmartins.samplerequery.external.infrastructure.db.mapper.requeryMapper;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
+
 import br.com.tomazmartins.samplerequery.core.models.Country;
-import br.com.tomazmartins.samplerequery.core.models.President;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.entity.CountryEntity;
-import br.com.tomazmartins.samplerequery.external.infrastructure.db.mapper.Mapper;
 
+@Mapper( uses = {PresidentMapper.class} )
+public abstract class CountryMapper {
+    public static CountryMapper INSTANCE = Mappers.getMapper( CountryMapper.class );
 
-public class CountryMapper implements Mapper<CountryEntity, Country> {
-        @Override
     public Country mapFrom( CountryEntity fromObject ) {
-        Country country;
-
-        if( fromObject != null ) {
-            country = new Country();
-
-            country.setPopulation( fromObject.getPopulation() );
-            country.setName( fromObject.getName() );
-            country.setId( fromObject.getId() );
-
-            President president = new PresidentMapper().mapFrom( fromObject.getPresident() );
-            country.setPresident( president );
-        } else {
-            country = null;
-        }
-
+        Country country = CountryMapper.INSTANCE.toCountry( fromObject );
         return country;
     }
+
+    @Mapping( source = "states", target = "states", ignore = true )
+    abstract Country toCountry( CountryEntity entity );
 }

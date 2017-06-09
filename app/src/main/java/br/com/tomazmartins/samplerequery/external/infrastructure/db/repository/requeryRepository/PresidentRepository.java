@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.tomazmartins.samplerequery.core.models.President;
-import br.com.tomazmartins.samplerequery.external.infrastructure.db.entity.CountryEntity;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.entity.PresidentEntity;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.entity.PresidentEntityImpl;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.mapper.Mapper;
@@ -19,7 +18,6 @@ import io.requery.sql.EntityDataStore;
 
 public class PresidentRepository extends RequeryRepository<President> {
     private Mapper<President, PresidentEntity> toEntity = new PresidentEntityMapper();
-    private Mapper<PresidentEntity, President> toPresident = new PresidentMapper();
 
     public PresidentRepository( EntityDataStore<Persistable> dataStore ) {
         super( dataStore );
@@ -38,7 +36,7 @@ public class PresidentRepository extends RequeryRepository<President> {
         PresidentEntity entity = toEntity.mapFrom( item );
         PresidentEntity presidentInserted = getDataStore().insert( entity );
 
-        return toPresident.mapFrom( presidentInserted );
+        return PresidentMapper.INSTANCE.mapFrom( presidentInserted );
     }
 
     @Override
@@ -54,7 +52,7 @@ public class PresidentRepository extends RequeryRepository<President> {
         PresidentEntity entity = toEntity.mapFrom( item );
         PresidentEntity presidentUpdated = getDataStore().update( entity );
 
-        return toPresident.mapFrom( presidentUpdated );
+        return PresidentMapper.INSTANCE.mapFrom( presidentUpdated );
     }
 
     @Override
@@ -77,7 +75,7 @@ public class PresidentRepository extends RequeryRepository<President> {
         final List<President> presidentList = new ArrayList<>();
 
         for( PresidentEntity entity : result ) {
-            President president = toPresident.mapFrom( entity );
+            President president = PresidentMapper.INSTANCE.mapFrom( entity );
             presidentList.add( president );
         }
 
@@ -91,7 +89,7 @@ public class PresidentRepository extends RequeryRepository<President> {
                 .get()
                 .first();
 
-        return toPresident.mapFrom( entity );
+        return PresidentMapper.INSTANCE.mapFrom( entity );
     }
 
     @Override
@@ -102,6 +100,6 @@ public class PresidentRepository extends RequeryRepository<President> {
                 .get()
                 .first();
 
-        return toPresident.mapFrom( entity );
+        return PresidentMapper.INSTANCE.mapFrom( entity );
     }
 }

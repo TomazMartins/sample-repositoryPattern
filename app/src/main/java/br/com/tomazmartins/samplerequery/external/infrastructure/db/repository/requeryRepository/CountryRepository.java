@@ -20,7 +20,6 @@ import io.requery.sql.EntityDataStore;
 
 public class CountryRepository extends RequeryRepository<Country> {
     private Mapper<Country, CountryEntity> toEntity = new CountryEntityMapper();
-    private Mapper<CountryEntity, Country> toCountry = new CountryMapper();
 
     public CountryRepository( EntityDataStore<Persistable> dataStore ) {
         super( dataStore );
@@ -40,7 +39,7 @@ public class CountryRepository extends RequeryRepository<Country> {
         CountryEntity entity = toEntity.mapFrom( item );
         CountryEntity entityInserted = getDataStore().insert( entity );
 
-        return toCountry.mapFrom( entityInserted );
+        return CountryMapper.INSTANCE.mapFrom( entityInserted );
     }
 
     @Override
@@ -57,7 +56,7 @@ public class CountryRepository extends RequeryRepository<Country> {
         CountryEntity entity = toEntity.mapFrom( item );
         CountryEntity entityUpdated = getDataStore().update( entity );
 
-        return toCountry.mapFrom( entityUpdated );
+        return CountryMapper.INSTANCE.mapFrom( entityUpdated );
     }
 
     @Override
@@ -79,7 +78,7 @@ public class CountryRepository extends RequeryRepository<Country> {
         final List<Country> countryList = new ArrayList<>();
 
         for( CountryEntity entity : result ) {
-            Country country = toCountry.mapFrom( entity );
+            Country country = CountryMapper.INSTANCE.mapFrom( entity );
             countryList.add( country );
         }
 
@@ -93,7 +92,7 @@ public class CountryRepository extends RequeryRepository<Country> {
                 .get()
                 .first();
 
-        return toCountry.mapFrom( entity );
+        return CountryMapper.INSTANCE.mapFrom( entity );
     }
 
     @Override
@@ -104,6 +103,6 @@ public class CountryRepository extends RequeryRepository<Country> {
                 .get()
                 .first();
 
-        return toCountry.mapFrom( entity );
+        return CountryMapper.INSTANCE.mapFrom( entity );
     }
 }
