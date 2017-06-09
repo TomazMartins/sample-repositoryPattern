@@ -1,11 +1,14 @@
 package br.com.tomazmartins.samplerequery.external.infrastructure.db.entity;
 
 
+import java.util.List;
+
 import io.requery.CascadeAction;
 import io.requery.Entity;
 import io.requery.ForeignKey;
 import io.requery.Generated;
 import io.requery.Key;
+import io.requery.OneToMany;
 import io.requery.OneToOne;
 import io.requery.Persistable;
 import io.requery.Table;
@@ -48,11 +51,15 @@ public interface CountryEntity extends Persistable {
     @ForeignKey
     PresidentEntity getPresident();
 
+    @OneToMany( mappedBy = "country" )
+    List<StateEntity> getStates();
+
     int getPopulation();
     String getName();
 
+    void setPresident( PresidentEntity president );
+    void setStates( List<? extends StateEntity> states );
     void setPopulation( int population );
     void setName( String name );
     void setId( int id );
-    void setPresident( PresidentEntity president );
 }

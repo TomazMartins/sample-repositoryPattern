@@ -1,8 +1,6 @@
 package br.com.tomazmartins.samplerequery.external.modules.main.presenter;
 
 
-import android.util.Log;
-
 import java.util.List;
 
 import br.com.tomazmartins.samplerequery.core.models.Country;
@@ -10,12 +8,11 @@ import br.com.tomazmartins.samplerequery.core.models.President;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.repository.Repository;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.repository.requeryRepository.CountryRepository;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.repository.requeryRepository.PresidentRepository;
+import br.com.tomazmartins.samplerequery.external.infrastructure.db.specification.requerySpecification.FindCountryByIdSpec;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.specification.requerySpecification.ListAllCountriesSpec;
 import br.com.tomazmartins.samplerequery.external.modules.main.ui.MainView;
 import io.requery.Persistable;
 import io.requery.sql.EntityDataStore;
-
-import static android.R.attr.country;
 
 public class MainPresenterImpl implements MainPresenter {
     private Repository<Country> mCountryRepository;
@@ -34,7 +31,19 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onResume() {
-        createCountries();
+        if( mCountryRepository.count() == 0 && mPresidentRepository.count() == 0 ) {
+            createCountries();
+        }
+
+        int qtdCountries = mCountryRepository.count();
+        int qtdPresidents = mPresidentRepository.count();
+
+        mView.summaryDB( qtdCountries, qtdPresidents );
+
+        for( int id = 1; id <= mCountryRepository.count(); ++id ) {
+            Country country = findCountry( id );
+            summaryCountry( country );
+        }
 
         List<Country> countryList = mCountryRepository.query( new ListAllCountriesSpec() );
         mView.setList( countryList );
@@ -58,8 +67,8 @@ public class MainPresenterImpl implements MainPresenter {
 
         String infoPresident = country.getPresident().getName() + " has the follow attributes: \n" +
                 "ID( " + country.getPresident().getId() + " ),\n" +
-                "Name( " + country.getPresident().getName() + " ),\n" +
-                "Country( " + country.getPresident().getCountry().getId() + "-" + country.getPresident().getCountry().getName() + " );\n\n";
+                "Name( " + country.getPresident().getName() + " );\n\n";
+//                "Country( " + country.getPresident().getCountry().getId() + "-" + country.getPresident().getCountry().getName() + " );\n\n";
 
         mView.summaryCountry( infoCountry, infoPresident );
     }
@@ -106,5 +115,10 @@ public class MainPresenterImpl implements MainPresenter {
 
         england.setPresident( theresaMay );
         return mCountryRepository.update( england );
+    }
+
+    private Country findCountry( int id ) {
+        final int FIRST = 0;
+        return mCountryRepository.query( new FindCountryByIdSpec( id ) ).get( FIRST );
     }
 }

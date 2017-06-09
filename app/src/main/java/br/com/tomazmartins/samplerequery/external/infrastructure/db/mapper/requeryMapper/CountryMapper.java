@@ -7,7 +7,7 @@ import br.com.tomazmartins.samplerequery.external.infrastructure.db.mapper.Mappe
 
 
 public class CountryMapper implements Mapper<CountryEntity, Country> {
-    @Override
+        @Override
     public Country mapFrom( CountryEntity fromObject ) {
         Country country;
 
@@ -19,7 +19,6 @@ public class CountryMapper implements Mapper<CountryEntity, Country> {
             country.setId( fromObject.getId() );
 
             President president = new PresidentMapper().mapFrom( fromObject.getPresident() );
-
             country.setPresident( president );
         } else {
             country = null;

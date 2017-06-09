@@ -1,18 +1,15 @@
 package br.com.tomazmartins.samplerequery.external.infrastructure.db.entity;
 
-
-import io.requery.CascadeAction;
 import io.requery.Entity;
-import io.requery.ForeignKey;
 import io.requery.Generated;
 import io.requery.Key;
-import io.requery.OneToOne;
+import io.requery.ManyToOne;
 import io.requery.Persistable;
 import io.requery.Table;
 
-@Entity( name = "PresidentEntityImpl" )
-@Table( name = "President" )
-public interface PresidentEntity extends Persistable {
+@Table( name = "State" )
+@Entity( name = "StateEntityImpl" )
+public interface StateEntity extends Persistable {
     /*
     * KEY:
     *   The attribute ID is the Primary Key.
@@ -24,16 +21,7 @@ public interface PresidentEntity extends Persistable {
     @Generated
     int getId();
 
-    /*
-    * ONE-TO-ONE:
-    *   The relationship between PRESIDENT and COUNTRY
-    *   is one-to-one, because a COUNTRY must has only
-    *   one PRESIDENT
-    *   and
-    *   a PRESIDENT is the PRESIDENT
-    *   of only one COUNTRY.
-    * */
-    @OneToOne( mappedBy = "president" )
+    @ManyToOne
     CountryEntity getCountry();
 
     String getName();

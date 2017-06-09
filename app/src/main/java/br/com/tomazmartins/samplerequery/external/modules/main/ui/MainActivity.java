@@ -45,15 +45,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
     protected void onResume() {
         super.onResume();
         mPresenter.onResume();
-
-        // ONLY TO DEMONSTRATION
-        EntityDataStore<Persistable> dataStore;
-        dataStore = ((SampleApplication) getApplication()).getDataStore();
-        Repository<Country> countryRepository = new CountryRepository( dataStore );
-        Repository<President> presidentRepository = new PresidentRepository( dataStore );
-
-        Log.i( "LOG", "Qtd. Presidents: "+ presidentRepository.count() );
-        Log.i( "LOG", "Qtd. Countries: "+ countryRepository.count() );
     }
 
     @Override
@@ -66,5 +57,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void summaryCountry( String infoCountry, String infoPresident ) {
         Log.i( "LOG", infoCountry );
         Log.i( "LOG", infoPresident );
+    }
+
+    @Override
+    public void summaryDB( int numberCountries, int numberPresidents ) {
+        Log.i( "LOG", "Qtd. Presidents: "+ numberPresidents );
+        Log.i( "LOG", "Qtd. Countries: "+ numberCountries );
     }
 }
