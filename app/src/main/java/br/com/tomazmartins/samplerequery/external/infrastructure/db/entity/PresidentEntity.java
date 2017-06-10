@@ -1,9 +1,7 @@
 package br.com.tomazmartins.samplerequery.external.infrastructure.db.entity;
 
 
-import io.requery.CascadeAction;
 import io.requery.Entity;
-import io.requery.ForeignKey;
 import io.requery.Generated;
 import io.requery.Key;
 import io.requery.OneToOne;
@@ -12,7 +10,7 @@ import io.requery.Table;
 
 @Entity( name = "PresidentEntityImpl" )
 @Table( name = "President" )
-public interface PresidentEntity extends Persistable {
+public abstract class PresidentEntity implements Persistable {
     /*
     * KEY:
     *   The attribute ID is the Primary Key.
@@ -22,7 +20,7 @@ public interface PresidentEntity extends Persistable {
     * */
     @Key
     @Generated
-    int getId();
+    int id;
 
     /*
     * ONE-TO-ONE:
@@ -34,11 +32,23 @@ public interface PresidentEntity extends Persistable {
     *   of only one COUNTRY.
     * */
     @OneToOne( mappedBy = "president" )
-    CountryEntity getCountry();
+    CountryEntity country;
 
-    String getName();
+    String name;
 
-    void setCountry( CountryEntity country );
-    void setName( String name );
-    void setId( int id );
+    abstract CountryEntity getCountry();
+    abstract String getName();
+    abstract int getId();
+
+    public void setCountry( CountryEntity country ) {
+        this.country = country;
+    }
+
+    public void setName( String name ) {
+        this.name = name;
+    }
+
+    public void setId( int id ) {
+        this.id = id;
+    }
 }

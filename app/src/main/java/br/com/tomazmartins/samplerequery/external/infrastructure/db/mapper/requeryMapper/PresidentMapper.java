@@ -11,6 +11,6 @@ import br.com.tomazmartins.samplerequery.external.infrastructure.db.entity.Presi
 public interface PresidentMapper {
     PresidentMapper INSTANCE = Mappers.getMapper( PresidentMapper.class );
 
-    @Mapping( source = "country", target = "country", ignore = true )
+    @Mapping( target = "country", ignore = true )
     President mapFrom( PresidentEntity entity );
 }

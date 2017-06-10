@@ -7,7 +7,6 @@ import java.util.List;
 import br.com.tomazmartins.samplerequery.core.models.President;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.entity.PresidentEntity;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.entity.PresidentEntityImpl;
-import br.com.tomazmartins.samplerequery.external.infrastructure.db.mapper.Mapper;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.mapper.requeryMapper.PresidentEntityMapper;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.mapper.requeryMapper.PresidentMapper;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.specification.Specification;
@@ -17,8 +16,6 @@ import io.requery.query.Result;
 import io.requery.sql.EntityDataStore;
 
 public class PresidentRepository extends RequeryRepository<President> {
-    private Mapper<President, PresidentEntity> toEntity = new PresidentEntityMapper();
-
     public PresidentRepository( EntityDataStore<Persistable> dataStore ) {
         super( dataStore );
     }
@@ -26,14 +23,14 @@ public class PresidentRepository extends RequeryRepository<President> {
     @Override
     public void save( final Iterable<President> items ) {
         for( President president : items ) {
-            PresidentEntity entity = toEntity.mapFrom( president );
+            PresidentEntity entity = PresidentEntityMapper.INSTANCE.mapFrom( president );
             getDataStore().insert( entity );
         }
     }
 
     @Override
     public President save( final President item ) {
-        PresidentEntity entity = toEntity.mapFrom( item );
+        PresidentEntity entity = PresidentEntityMapper.INSTANCE.mapFrom( item );
         PresidentEntity presidentInserted = getDataStore().insert( entity );
 
         return PresidentMapper.INSTANCE.mapFrom( presidentInserted );
@@ -41,7 +38,7 @@ public class PresidentRepository extends RequeryRepository<President> {
 
     @Override
     public President delete( final President item ) {
-        PresidentEntity entity = toEntity.mapFrom( item );
+        PresidentEntity entity = PresidentEntityMapper.INSTANCE.mapFrom( item );
         getDataStore().delete( entity );
 
         return item;
@@ -49,7 +46,7 @@ public class PresidentRepository extends RequeryRepository<President> {
 
     @Override
     public President update( final President item ) {
-        PresidentEntity entity = toEntity.mapFrom( item );
+        PresidentEntity entity = PresidentEntityMapper.INSTANCE.mapFrom( item );
         PresidentEntity presidentUpdated = getDataStore().update( entity );
 
         return PresidentMapper.INSTANCE.mapFrom( presidentUpdated );
@@ -67,7 +64,7 @@ public class PresidentRepository extends RequeryRepository<President> {
     @Override
     public List<President> query( final Specification specification ) {
         final RequerySpecification<PresidentEntity> requerySpecification;
-        requerySpecification = (RequerySpecification) specification;
+        requerySpecification = (RequerySpecification<PresidentEntity>) specification;
 
         final Result<PresidentEntity> result = requerySpecification
                 .toRequeryResult( getDataStore() );

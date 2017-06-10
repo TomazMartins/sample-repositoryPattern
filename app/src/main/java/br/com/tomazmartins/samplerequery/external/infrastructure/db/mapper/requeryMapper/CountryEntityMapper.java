@@ -1,32 +1,24 @@
 package br.com.tomazmartins.samplerequery.external.infrastructure.db.mapper.requeryMapper;
 
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
+
 import br.com.tomazmartins.samplerequery.core.models.Country;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.entity.CountryEntity;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.entity.CountryEntityImpl;
-import br.com.tomazmartins.samplerequery.external.infrastructure.db.entity.PresidentEntity;
-import br.com.tomazmartins.samplerequery.external.infrastructure.db.mapper.Mapper;
 
+@Mapper( uses = EntityFactory.class )
+public abstract class CountryEntityMapper {
+    public static CountryEntityMapper INSTANCE = Mappers.getMapper( CountryEntityMapper.class );
 
-public class CountryEntityMapper implements Mapper<Country, CountryEntity> {
-    @Override
     public CountryEntity mapFrom( Country fromObject ) {
-        CountryEntity entity;
-
-        if( fromObject != null ) {
-            entity = new CountryEntityImpl();
-
-            entity.setPopulation( fromObject.getPopulation() );
-            entity.setName( fromObject.getName() );
-            entity.setId( fromObject.getId() );
-
-            PresidentEntity presidentEntity = new PresidentEntityMapper()
-                    .mapFrom( fromObject.getPresident() );
-
-            entity.setPresident( presidentEntity );
-        } else {
-            entity = null;
-        }
-
+        CountryEntity entity = toEntity( fromObject );
         return entity;
     }
+
+    @BeanMapping( resultType = CountryEntity.class )
+    @Mapping( target = "president", ignore = true )
+    abstract CountryEntity toEntity( Country model );
 }

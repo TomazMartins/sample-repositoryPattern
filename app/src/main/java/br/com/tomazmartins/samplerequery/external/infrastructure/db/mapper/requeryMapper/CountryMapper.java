@@ -1,7 +1,6 @@
 package br.com.tomazmartins.samplerequery.external.infrastructure.db.mapper.requeryMapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import br.com.tomazmartins.samplerequery.core.models.Country;
@@ -16,6 +15,5 @@ public abstract class CountryMapper {
         return country;
     }
 
-    @Mapping( source = "states", target = "states", ignore = true )
     abstract Country toCountry( CountryEntity entity );
 }

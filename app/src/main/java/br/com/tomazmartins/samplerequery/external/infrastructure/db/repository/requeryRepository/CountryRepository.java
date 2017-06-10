@@ -1,15 +1,12 @@
 package br.com.tomazmartins.samplerequery.external.infrastructure.db.repository.requeryRepository;
 
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.tomazmartins.samplerequery.core.models.Country;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.entity.CountryEntity;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.entity.CountryEntityImpl;
-import br.com.tomazmartins.samplerequery.external.infrastructure.db.mapper.Mapper;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.mapper.requeryMapper.CountryEntityMapper;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.mapper.requeryMapper.CountryMapper;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.specification.Specification;
@@ -19,8 +16,6 @@ import io.requery.query.Result;
 import io.requery.sql.EntityDataStore;
 
 public class CountryRepository extends RequeryRepository<Country> {
-    private Mapper<Country, CountryEntity> toEntity = new CountryEntityMapper();
-
     public CountryRepository( EntityDataStore<Persistable> dataStore ) {
         super( dataStore );
     }
@@ -28,7 +23,7 @@ public class CountryRepository extends RequeryRepository<Country> {
     @Override
     public void save( final Iterable<Country> items ) {
         for( Country item : items ) {
-            CountryEntity entity = toEntity.mapFrom( item );
+            CountryEntity entity = CountryEntityMapper.INSTANCE.mapFrom( item );
 
             getDataStore().insert( entity );
         }
@@ -36,7 +31,7 @@ public class CountryRepository extends RequeryRepository<Country> {
 
     @Override
     public Country save( final Country item ) {
-        CountryEntity entity = toEntity.mapFrom( item );
+        CountryEntity entity = CountryEntityMapper.INSTANCE.mapFrom( item );
         CountryEntity entityInserted = getDataStore().insert( entity );
 
         return CountryMapper.INSTANCE.mapFrom( entityInserted );
@@ -44,7 +39,7 @@ public class CountryRepository extends RequeryRepository<Country> {
 
     @Override
     public Country delete( final Country item ) {
-        CountryEntity entity = toEntity.mapFrom( item );
+        CountryEntity entity = CountryEntityMapper.INSTANCE.mapFrom( item );
 
         getDataStore().delete( entity );
 
@@ -53,7 +48,7 @@ public class CountryRepository extends RequeryRepository<Country> {
 
     @Override
     public Country update( final Country item ) {
-        CountryEntity entity = toEntity.mapFrom( item );
+        CountryEntity entity = CountryEntityMapper.INSTANCE.mapFrom( item );
         CountryEntity entityUpdated = getDataStore().update( entity );
 
         return CountryMapper.INSTANCE.mapFrom( entityUpdated );
@@ -71,7 +66,7 @@ public class CountryRepository extends RequeryRepository<Country> {
     @Override
     public List<Country> query( final Specification specification ) {
         final RequerySpecification<CountryEntity> requerySpecification;
-        requerySpecification = (RequerySpecification) specification;
+        requerySpecification = (RequerySpecification<CountryEntity>) specification;
 
         final Result<CountryEntity> result = requerySpecification.toRequeryResult( getDataStore() );
 

@@ -1,21 +1,18 @@
 package br.com.tomazmartins.samplerequery.external.infrastructure.db.entity;
 
 
-import java.util.List;
-
 import io.requery.CascadeAction;
 import io.requery.Entity;
 import io.requery.ForeignKey;
 import io.requery.Generated;
 import io.requery.Key;
-import io.requery.OneToMany;
 import io.requery.OneToOne;
 import io.requery.Persistable;
 import io.requery.Table;
 
 @Entity( name = "CountryEntityImpl" )
 @Table( name = "Country" )
-public interface CountryEntity extends Persistable {
+public abstract class CountryEntity implements Persistable {
     /*
     * KEY:
     *   The attribute ID is the Primary Key.
@@ -25,7 +22,7 @@ public interface CountryEntity extends Persistable {
     * */
     @Key
     @Generated
-    int getId();
+    int id;
 
     /*
     * ONE-TO-ONE:
@@ -49,17 +46,29 @@ public interface CountryEntity extends Persistable {
     * */
     @OneToOne( cascade = CascadeAction.NONE )
     @ForeignKey
-    PresidentEntity getPresident();
+    PresidentEntity president;
 
-    @OneToMany( mappedBy = "country" )
-    List<StateEntity> getStates();
+    int population;
+    String name;
 
-    int getPopulation();
-    String getName();
+    abstract PresidentEntity getPresident();
+    abstract int getPopulation();
+    abstract String getName();
+    abstract int getId();
 
-    void setPresident( PresidentEntity president );
-    void setStates( List<? extends StateEntity> states );
-    void setPopulation( int population );
-    void setName( String name );
-    void setId( int id );
+    public void setPresident( PresidentEntity president ) {
+        this.president = president;
+    }
+
+    public void setPopulation( int population ) {
+        this.population = population;
+    }
+
+    public void setName( String name ) {
+        this.name = name;
+    }
+
+    public void setId( int id ) {
+        this.id = id;
+    }
 }

@@ -13,7 +13,8 @@ import io.requery.sql.EntityDataStore;
 
 public class SampleApplication extends Application {
     private static final int DB_VERSION = 3;
-    private EntityDataStore<Persistable> dataStore;
+    private EntityDataStore<Persistable> mDataStore;
+    private DatabaseSource mSource;
 
     @Override
     public void onCreate() {
@@ -37,21 +38,26 @@ public class SampleApplication extends Application {
 
 
         // Guarantee that there is only one connection with the database.
-        if( dataStore == null ) {
+        if( mDataStore == null ) {
             /*
             * Create the connection with the database.
             *
             *   As parameters: a 'context', a 'EntityModel' and a number,
             *   indicate the version of the database.
             * */
-            DatabaseSource source = new DatabaseSource( this, models, DB_VERSION );
-            source.setLoggingEnabled( true );
+            mSource = new DatabaseSource( this, models, DB_VERSION );
+            mSource.setLoggingEnabled( true );
 
-            Configuration configuration = source.getConfiguration();
+            Configuration configuration = mSource.getConfiguration();
 
-            dataStore = new EntityDataStore<>( configuration );
+            mDataStore = new EntityDataStore<>( configuration );
         }
 
-        return dataStore;
+        return mDataStore;
+    }
+
+    public void closeDataStore() {
+        mDataStore.close();
+        mSource.close();
     }
 }
