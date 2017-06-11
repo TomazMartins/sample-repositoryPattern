@@ -22,7 +22,7 @@ public abstract class CountryEntity implements Persistable {
     * */
     @Key
     @Generated
-    int id;
+    protected int id;
 
     /*
     * ONE-TO-ONE:
@@ -46,15 +46,26 @@ public abstract class CountryEntity implements Persistable {
     * */
     @OneToOne( cascade = CascadeAction.NONE )
     @ForeignKey
-    PresidentEntity president;
+    protected PresidentEntity president;
 
-    int population;
-    String name;
+    protected int population;
+    protected String name;
 
-    abstract PresidentEntity getPresident();
-    abstract int getPopulation();
-    abstract String getName();
-    abstract int getId();
+    public PresidentEntity getPresident() {
+        return this.president;
+    }
+
+    public int getPopulation() {
+        return this.population;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getId() {
+        return this.id;
+    }
 
     public void setPresident( PresidentEntity president ) {
         this.president = president;

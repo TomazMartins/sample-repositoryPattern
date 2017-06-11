@@ -20,7 +20,7 @@ public abstract class PresidentEntity implements Persistable {
     * */
     @Key
     @Generated
-    int id;
+    protected int id;
 
     /*
     * ONE-TO-ONE:
@@ -32,13 +32,21 @@ public abstract class PresidentEntity implements Persistable {
     *   of only one COUNTRY.
     * */
     @OneToOne( mappedBy = "president" )
-    CountryEntity country;
+    protected CountryEntity country;
 
-    String name;
+    protected String name;
 
-    abstract CountryEntity getCountry();
-    abstract String getName();
-    abstract int getId();
+    public CountryEntity getCountry() {
+        return this.country;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getId() {
+        return this.id;
+    }
 
     public void setCountry( CountryEntity country ) {
         this.country = country;

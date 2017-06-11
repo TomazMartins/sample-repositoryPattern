@@ -13,6 +13,6 @@ public interface PresidentEntityMapper {
     PresidentEntityMapper INSTANCE = Mappers.getMapper( PresidentEntityMapper.class );
 
     @BeanMapping( resultType = PresidentEntity.class )
-    @Mapping( target = "country", ignore = true)
+    @Mapping( target = "country", ignore = true )
     PresidentEntity mapFrom( President fromObject );
 }

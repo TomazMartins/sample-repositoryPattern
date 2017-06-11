@@ -7,7 +7,6 @@ import org.mapstruct.factory.Mappers;
 
 import br.com.tomazmartins.samplerequery.core.models.Country;
 import br.com.tomazmartins.samplerequery.external.infrastructure.db.entity.CountryEntity;
-import br.com.tomazmartins.samplerequery.external.infrastructure.db.entity.CountryEntityImpl;
 
 @Mapper( uses = EntityFactory.class )
 public abstract class CountryEntityMapper {
