@@ -67,8 +67,8 @@ public class MainPresenterImpl implements MainPresenter {
 
         String infoPresident = country.getPresident().getName() + " has the follow attributes: \n" +
                 "ID( " + country.getPresident().getId() + " ),\n" +
-                "Name( " + country.getPresident().getName() + " );\n\n";
-//                "Country( " + country.getPresident().getCountry().getId() + "-" + country.getPresident().getCountry().getName() + " );\n\n";
+                "Name( " + country.getPresident().getName() + " ),\n" +
+                "Country( " + country.getPresident().getCountry().getId() + "-" + country.getPresident().getCountry().getName() + " );\n\n";
 
         mView.summaryCountry( infoCountry, infoPresident );
     }

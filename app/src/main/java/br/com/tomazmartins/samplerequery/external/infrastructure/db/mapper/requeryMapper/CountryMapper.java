@@ -12,6 +12,8 @@ public abstract class CountryMapper {
 
     public Country mapFrom( CountryEntity fromObject ) {
         Country country = CountryMapper.INSTANCE.toCountry( fromObject );
+        country.getPresident().setCountry( country );
+
         return country;
     }
 
