@@ -15,8 +15,18 @@ import io.requery.Persistable;
 import io.requery.query.Result;
 import io.requery.sql.EntityDataStore;
 
-public class PresidentRepository extends RequeryRepository<President> {
-    public PresidentRepository( EntityDataStore<Persistable> dataStore ) {
+/*
+* PRESIDENT REQUERY REPOSITORY:
+*   extends the abstract class REQUERY REPOSITORY.
+*
+*   It's guarantee for the business layer that the
+*   repository will have all operation that it want.
+*
+*   The logic of this operations, in this repository,
+*   are based in Requery's way.
+* */
+public class PresidentRequeryRepository extends RequeryRepository<President> {
+    public PresidentRequeryRepository( EntityDataStore<Persistable> dataStore ) {
         super( dataStore );
     }
 

@@ -6,8 +6,8 @@ import java.util.List;
 import br.com.tomazmartins.sampleRDP.core.models.Country;
 import br.com.tomazmartins.sampleRDP.core.models.President;
 import br.com.tomazmartins.sampleRDP.external.infrastructure.db.repository.Repository;
-import br.com.tomazmartins.sampleRDP.external.infrastructure.db.repository.requeryRepository.CountryRepository;
-import br.com.tomazmartins.sampleRDP.external.infrastructure.db.repository.requeryRepository.PresidentRepository;
+import br.com.tomazmartins.sampleRDP.external.infrastructure.db.repository.requeryRepository.CountryRequeryRepository;
+import br.com.tomazmartins.sampleRDP.external.infrastructure.db.repository.requeryRepository.PresidentRequeryRepository;
 import br.com.tomazmartins.sampleRDP.external.infrastructure.db.specification.requerySpecification.FindCountryByIdSpec;
 import br.com.tomazmartins.sampleRDP.external.infrastructure.db.specification.requerySpecification.ListAllCountriesSpec;
 import br.com.tomazmartins.sampleRDP.external.modules.main.ui.MainView;
@@ -20,8 +20,8 @@ public class MainPresenterImpl implements MainPresenter {
     private MainView mView;
 
     public MainPresenterImpl( EntityDataStore<Persistable> dataStore ) {
-        this.mCountryRepository = new CountryRepository( dataStore );
-        this.mPresidentRepository = new PresidentRepository( dataStore );
+        this.mCountryRepository = new CountryRequeryRepository( dataStore );
+        this.mPresidentRepository = new PresidentRequeryRepository( dataStore );
     }
 
     @Override

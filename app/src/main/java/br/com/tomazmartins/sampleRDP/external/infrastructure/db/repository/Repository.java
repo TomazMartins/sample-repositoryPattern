@@ -5,17 +5,25 @@ import java.util.List;
 
 import br.com.tomazmartins.sampleRDP.external.infrastructure.db.specification.Specification;
 
-public interface Repository<T> {
-    void save( final Iterable<T> items );
+/*
+* REPOSITORY:
+*   This class serves as a contract.
+*   All Repositories must implement this methods.
+*
+*   It's guarantee which the repository that we use
+*   has useful and known methods.
+* */
+public interface Repository<Model> {
+    void save( final Iterable<Model> items );
 
-    T save( final T item );
-    T delete( final T item );
-    T update( final T item );
+    Model save( final Model item );
+    Model delete( final Model item );
+    Model update( final Model item );
 
     int count();
 
-    List<T> query( Specification specification );
+    List<Model> query( Specification specification );
 
-    T first();
-    T last();
+    Model first();
+    Model last();
 }
