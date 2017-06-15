@@ -20,7 +20,7 @@ import br.com.tomazmartins.sampleRDP.external.infrastructure.db.entity.CountryEn
 *
 *   uses = {SomeClass.class, AnotherClass.class}
 * */
-@Mapper( uses = {PresidentMapper.class} )
+@Mapper( uses = {PresidentMapper.class, StateMapper.class} )
 public abstract class CountryMapper {
     /*
     * It's necessary declare this constant to receive the

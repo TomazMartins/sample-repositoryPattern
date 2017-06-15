@@ -1,11 +1,22 @@
 package br.com.tomazmartins.sampleRDP.core.models;
 
 
+import java.util.List;
+
 public class Country {
+    private List<State> states;
     private President president;
     private int population;
     private String name;
     private int id;
+
+    public List<State> getStates() {
+        return states;
+    }
+
+    public void setStates( List<State> states ) {
+        this.states = states;
+    }
 
     public President getPresident() {
         return president;

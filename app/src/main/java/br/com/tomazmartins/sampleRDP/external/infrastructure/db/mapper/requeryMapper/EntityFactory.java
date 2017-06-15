@@ -5,6 +5,8 @@ import br.com.tomazmartins.sampleRDP.external.infrastructure.db.entity.CountryEn
 import br.com.tomazmartins.sampleRDP.external.infrastructure.db.entity.CountryEntityImpl;
 import br.com.tomazmartins.sampleRDP.external.infrastructure.db.entity.PresidentEntity;
 import br.com.tomazmartins.sampleRDP.external.infrastructure.db.entity.PresidentEntityImpl;
+import br.com.tomazmartins.sampleRDP.external.infrastructure.db.entity.StateEntity;
+import br.com.tomazmartins.sampleRDP.external.infrastructure.db.entity.StateEntityImpl;
 
 public class EntityFactory {
     /*
@@ -33,5 +35,9 @@ public class EntityFactory {
 
     public PresidentEntity createPresidentEntity() {
         return new PresidentEntityImpl();
+    }
+
+    public StateEntity createStateEntity() {
+        return new StateEntityImpl();
     }
 }

@@ -4,8 +4,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import br.com.tomazmartins.sampleRDP.core.models.President;
-import br.com.tomazmartins.sampleRDP.external.infrastructure.db.entity.PresidentEntity;
+import java.util.List;
+
+import br.com.tomazmartins.sampleRDP.core.models.State;
+import br.com.tomazmartins.sampleRDP.external.infrastructure.db.entity.StateEntity;
 
 /*
 * MAPPER:
@@ -22,14 +24,14 @@ import br.com.tomazmartins.sampleRDP.external.infrastructure.db.entity.President
 *   uses = {SomeClass.class, AnotherClass.class}
 * */
 @Mapper
-public interface PresidentMapper {
+public interface StateMapper {
     /*
     * Its necessary declare this constant to receive the
     *   mapper created by the Mappers factory.
     *
-    *   For convention, the name is INSTANCE
+    *   For convention, the is INSTANCE
     * */
-    PresidentMapper INSTANCE = Mappers.getMapper( PresidentMapper.class );
+    StateMapper INSTANCE = Mappers.getMapper( StateMapper.class );
 
     /*
     * MAPPING:
@@ -43,5 +45,7 @@ public interface PresidentMapper {
     *   generated concrete class.
     * */
     @Mapping( target = "country", ignore = true )
-    President mapFrom( PresidentEntity entity );
+    State mapFrom( StateEntity entity );
+
+    List<State> toStateList( List<StateEntity> entityList );
 }

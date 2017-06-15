@@ -1,11 +1,14 @@
 package br.com.tomazmartins.sampleRDP.external.infrastructure.db.entity;
 
 
+import java.util.List;
+
 import io.requery.CascadeAction;
 import io.requery.Entity;
 import io.requery.ForeignKey;
 import io.requery.Generated;
 import io.requery.Key;
+import io.requery.OneToMany;
 import io.requery.OneToOne;
 import io.requery.Persistable;
 import io.requery.Table;
@@ -93,6 +96,9 @@ public abstract class CountryEntity implements Persistable {
     @ForeignKey
     protected PresidentEntity president;
 
+    @OneToMany( cascade = CascadeAction.NONE )
+    protected List<StateEntity> states;
+
     protected int population;
     protected String name;
 
@@ -102,35 +108,43 @@ public abstract class CountryEntity implements Persistable {
     *   to allow access of it for MapStruct.
     * */
 
-    public PresidentEntity getPresident() {
-        return this.president;
-    }
-
-    public int getPopulation() {
-        return this.population;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
     public int getId() {
-        return this.id;
+        return id;
+    }
+
+    public void setId( int id ) {
+        this.id = id;
+    }
+
+    public PresidentEntity getPresident() {
+        return president;
     }
 
     public void setPresident( PresidentEntity president ) {
         this.president = president;
     }
 
+    public List<StateEntity> getStates() {
+        return states;
+    }
+
+    public void setStates( List<StateEntity> states ) {
+        this.states = states;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
     public void setPopulation( int population ) {
         this.population = population;
     }
 
-    public void setName( String name ) {
-        this.name = name;
+    public String getName() {
+        return name;
     }
 
-    public void setId( int id ) {
-        this.id = id;
+    public void setName( String name ) {
+        this.name = name;
     }
 }
