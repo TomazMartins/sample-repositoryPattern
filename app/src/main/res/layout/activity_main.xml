@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.tomazmartins.samplerequery.external.modules.main.ui.MainActivity">
+    tools:context="br.com.tomazmartins.sampleRDP.external.modules.main.ui.MainActivity">
 
     <include layout="@layout/content_main" />
 
