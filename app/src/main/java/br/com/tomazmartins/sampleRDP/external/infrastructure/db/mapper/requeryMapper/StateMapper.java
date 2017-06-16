@@ -4,8 +4,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import java.util.List;
-
 import br.com.tomazmartins.sampleRDP.core.models.State;
 import br.com.tomazmartins.sampleRDP.external.infrastructure.db.entity.StateEntity;
 
@@ -46,6 +44,4 @@ public interface StateMapper {
     * */
     @Mapping( target = "country", ignore = true )
     State mapFrom( StateEntity entity );
-
-    List<State> toStateList( List<StateEntity> entityList );
 }

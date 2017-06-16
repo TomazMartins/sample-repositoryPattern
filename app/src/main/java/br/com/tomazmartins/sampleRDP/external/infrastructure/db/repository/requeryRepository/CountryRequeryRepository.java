@@ -42,9 +42,9 @@ public class CountryRequeryRepository extends RequeryRepository<Country> {
     @Override
     public Country save( final Country item ) {
         CountryEntity entity = CountryEntityMapper.INSTANCE.mapFrom( item );
-        CountryEntity entityInserted = getDataStore().insert( entity );
+        entity = getDataStore().insert( entity );
 
-        return CountryMapper.INSTANCE.mapFrom( entityInserted );
+        return CountryMapper.INSTANCE.mapFrom( entity );
     }
 
     @Override
@@ -59,9 +59,9 @@ public class CountryRequeryRepository extends RequeryRepository<Country> {
     @Override
     public Country update( final Country item ) {
         CountryEntity entity = CountryEntityMapper.INSTANCE.mapFrom( item );
-        CountryEntity entityUpdated = getDataStore().update( entity );
+        entity = getDataStore().update( entity );
 
-        return CountryMapper.INSTANCE.mapFrom( entityUpdated );
+        return CountryMapper.INSTANCE.mapFrom( entity );
     }
 
     @Override

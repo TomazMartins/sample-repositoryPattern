@@ -41,9 +41,9 @@ public class PresidentRequeryRepository extends RequeryRepository<President> {
     @Override
     public President save( final President item ) {
         PresidentEntity entity = PresidentEntityMapper.INSTANCE.mapFrom( item );
-        PresidentEntity presidentInserted = getDataStore().insert( entity );
+        entity = getDataStore().insert( entity );
 
-        return PresidentMapper.INSTANCE.mapFrom( presidentInserted );
+        return PresidentMapper.INSTANCE.mapFrom( entity );
     }
 
     @Override
@@ -57,9 +57,9 @@ public class PresidentRequeryRepository extends RequeryRepository<President> {
     @Override
     public President update( final President item ) {
         PresidentEntity entity = PresidentEntityMapper.INSTANCE.mapFrom( item );
-        PresidentEntity presidentUpdated = getDataStore().update( entity );
+        entity = getDataStore().update( entity );
 
-        return PresidentMapper.INSTANCE.mapFrom( presidentUpdated );
+        return PresidentMapper.INSTANCE.mapFrom( entity );
     }
 
     @Override
