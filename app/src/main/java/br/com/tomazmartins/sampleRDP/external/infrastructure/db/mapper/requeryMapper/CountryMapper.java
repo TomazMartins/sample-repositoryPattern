@@ -3,7 +3,10 @@ package br.com.tomazmartins.sampleRDP.external.infrastructure.db.mapper.requeryM
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 import br.com.tomazmartins.sampleRDP.core.models.Country;
+import br.com.tomazmartins.sampleRDP.core.models.State;
 import br.com.tomazmartins.sampleRDP.external.infrastructure.db.entity.CountryEntity;
 
 /*
@@ -41,6 +44,7 @@ public abstract class CountryMapper {
     public Country mapFrom( CountryEntity fromObject ) {
         Country country = CountryMapper.INSTANCE.toCountry( fromObject );
         country.getPresident().setCountry( country );
+        associateCountryAndStates( country );
 
         return country;
     }
@@ -50,4 +54,12 @@ public abstract class CountryMapper {
     *   the target.
     * */
     abstract Country toCountry( CountryEntity entity );
+
+    private void associateCountryAndStates( Country country ) {
+        List<State> stateList = country.getStates();
+
+        for( State state : stateList ) {
+            state.setCountry( country );
+        }
+    }
 }

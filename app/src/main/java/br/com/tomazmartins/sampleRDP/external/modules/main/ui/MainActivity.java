@@ -54,14 +54,16 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void summaryCountry( String infoCountry, String infoPresident ) {
+    public void summaryCountry( String infoCountry, String infoPresident, String infoState ) {
         Log.i( "LOG", infoCountry );
         Log.i( "LOG", infoPresident );
+        Log.i( "LOG", infoState );
     }
 
     @Override
-    public void summaryDB( int numberCountries, int numberPresidents ) {
+    public void summaryDB( int numberCountries, int numberPresidents, int numberStates ) {
         Log.i( "LOG", "Qtd. Presidents: "+ numberPresidents );
         Log.i( "LOG", "Qtd. Countries: "+ numberCountries );
+        Log.i( "LOG", "Qtd. States: "+ numberStates );
     }
 }

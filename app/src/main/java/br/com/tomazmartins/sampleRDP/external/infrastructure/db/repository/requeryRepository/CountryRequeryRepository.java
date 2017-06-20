@@ -31,12 +31,18 @@ public class CountryRequeryRepository extends RequeryRepository<Country> {
     }
 
     @Override
-    public void save( final Iterable<Country> items ) {
+    public List<Country> save( final Iterable<Country> items ) {
+        List<Country> countryList = new ArrayList<>();
+
         for( Country item : items ) {
             CountryEntity entity = CountryEntityMapper.INSTANCE.mapFrom( item );
+            entity = getDataStore().insert( entity );
 
-            getDataStore().insert( entity );
+            Country country = CountryMapper.INSTANCE.mapFrom( entity );
+            countryList.add( country );
         }
+
+        return countryList;
     }
 
     @Override

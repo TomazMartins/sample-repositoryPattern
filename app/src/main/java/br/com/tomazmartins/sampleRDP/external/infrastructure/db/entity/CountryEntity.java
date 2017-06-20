@@ -96,7 +96,7 @@ public abstract class CountryEntity implements Persistable {
     @ForeignKey
     protected PresidentEntity president;
 
-    @OneToMany( cascade = CascadeAction.NONE )
+    @OneToMany( mappedBy = "country", cascade = CascadeAction.NONE )
     protected List<StateEntity> states;
 
     protected int population;
@@ -108,43 +108,29 @@ public abstract class CountryEntity implements Persistable {
     *   to allow access of it for MapStruct.
     * */
 
-    public int getId() {
-        return id;
-    }
+    abstract public int getId();
 
     public void setId( int id ) {
         this.id = id;
     }
 
-    public PresidentEntity getPresident() {
-        return president;
-    }
+    abstract public PresidentEntity getPresident();
 
-    public void setPresident( PresidentEntity president ) {
-        this.president = president;
-    }
+    abstract public void setPresident( PresidentEntity president );
 
-    public List<StateEntity> getStates() {
-        return states;
-    }
+    abstract public List<StateEntity> getStates();
 
     public void setStates( List<StateEntity> states ) {
-        this.states = states;
+        for( StateEntity entity : states ) {
+            getStates().add( entity );
+        }
     }
 
-    public int getPopulation() {
-        return population;
-    }
+    abstract public int getPopulation();
 
-    public void setPopulation( int population ) {
-        this.population = population;
-    }
+    abstract public void setPopulation( int population );
 
-    public String getName() {
-        return name;
-    }
+    abstract public String getName();
 
-    public void setName( String name ) {
-        this.name = name;
-    }
+    abstract public void setName( String name );
 }

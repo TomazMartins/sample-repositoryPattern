@@ -31,11 +31,18 @@ public class StateRequeryRepository extends RequeryRepository<State> {
     }
 
     @Override
-    public void save( Iterable<State> items ) {
+    public List<State> save( Iterable<State> items ) {
+        List<State> stateList = new ArrayList<>();
+
         for( State item : items ) {
             StateEntity entity = StateEntityMapper.INSTANCE.mapFrom( item );
-            getDataStore().insert( entity );
+            entity = getDataStore().insert( entity );
+
+            State state = StateMapper.INSTANCE.mapFrom( entity );
+            stateList.add( state );
         }
+
+        return stateList;
     }
 
     @Override

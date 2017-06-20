@@ -31,11 +31,18 @@ public class PresidentRequeryRepository extends RequeryRepository<President> {
     }
 
     @Override
-    public void save( final Iterable<President> items ) {
-        for( President president : items ) {
-            PresidentEntity entity = PresidentEntityMapper.INSTANCE.mapFrom( president );
-            getDataStore().insert( entity );
+    public List<President> save( final Iterable<President> items ) {
+        List<President> presidentList = new ArrayList<>();
+
+        for( President item : items ) {
+            PresidentEntity entity = PresidentEntityMapper.INSTANCE.mapFrom( item );
+            entity = getDataStore().insert( entity );
+
+            President president = PresidentMapper.INSTANCE.mapFrom( entity );
+            presidentList.add( president );
         }
+
+        return presidentList;
     }
 
     @Override

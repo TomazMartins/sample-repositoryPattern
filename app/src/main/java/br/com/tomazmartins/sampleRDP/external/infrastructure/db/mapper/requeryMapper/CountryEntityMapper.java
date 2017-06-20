@@ -4,8 +4,11 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 import br.com.tomazmartins.sampleRDP.core.models.Country;
 import br.com.tomazmartins.sampleRDP.external.infrastructure.db.entity.CountryEntity;
+import br.com.tomazmartins.sampleRDP.external.infrastructure.db.entity.StateEntity;
 
 /*
 * MAPPER:
@@ -42,6 +45,7 @@ public abstract class CountryEntityMapper {
     public CountryEntity mapFrom( Country fromObject ) {
         CountryEntity entity = toEntity( fromObject );
         entity.getPresident().setCountry( entity );
+        associateCountryAndStates( entity );
 
         return entity;
     }
@@ -65,4 +69,12 @@ public abstract class CountryEntityMapper {
     * */
     @BeanMapping( resultType = CountryEntity.class )
     abstract CountryEntity toEntity( Country model );
+
+    private void associateCountryAndStates( CountryEntity countryEntity ) {
+        List<StateEntity> stateEntityList = countryEntity.getStates();
+
+        for( StateEntity stateEntity : stateEntityList ) {
+            stateEntity.setCountry( countryEntity );
+        }
+    }
 }

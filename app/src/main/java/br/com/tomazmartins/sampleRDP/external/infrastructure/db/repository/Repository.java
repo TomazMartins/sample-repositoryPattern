@@ -14,7 +14,7 @@ import br.com.tomazmartins.sampleRDP.external.infrastructure.db.specification.Sp
 *   has useful and known methods.
 * */
 public interface Repository<Model> {
-    void save( final Iterable<Model> items );
+    List<Model> save( final Iterable<Model> items );
 
     Model save( final Model item );
     Model delete( final Model item );
